@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>demo</title>
+  <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+  <script type="text/javascript">
+  //This is our function to be called with JSON data
+  // function showPrice(data) {
+  //     alert('price:' + data.price);
+  // }
+  // var url = 'http://localhost/a.js'; // URL of the external script
+  // this shows dynamic script insertion
+  // var script = document.createElement('script');
+  // script.setAttribute('src', url);
+
+  // load the script
+  // document.getElementsByTagName('head')[0].appendChild(script); 
+    // $.ajax({
+    //     url: 'http://www.baidu.com',
+    //     type:'get',
+    //     dataType: "jsonp",
+    //     // jsonpcallback:'callback'
+    //     success: function (data) {
+    //         // console.log(data)
+    //         alert("ok");
+    //     }
+    //     ,error: function(){
+    //      alert("error"); 
+    //     }
+    // })
+   // $.getJSON("http://localhost/ticker.php?callback=?",function(json){
+   //      alert(json.website);
+   //  });
+  </script>
+<script type="text/javascript" src="http://localhost/a.js"></script>
+<!--这是跨域请求的代码,切记，这段代码要在回调函数之后-->
+<script>
+    $.ajax({
+        type : "GET",
+        url : "http://localhost/ticker.php",
+        dataType : "jsonp",    // 数据格式指定为jsonp
+        jsonp: "callback",     // 传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名默认就是callback
+        jsonpCallback:"aaa",   // 指定回调方法
+        success : function(json){
+          // alert(json.price);
+        },
+        error:function(){
+          alert("error");
+        }
+    });   
+
+    // 回调方法
+    function aaa(data){
+        alert(data.price);
+    }
+</script>
+</head>
+<body>
+ 
+</body>
+  <script>
+  //   $('body').load('http://localhost/a.txt',function(responseTxt,statusTxt,xhr){
+  //   if(statusTxt=="success")
+  //     alert("外部内容加载成功！");
+  //   if(statusTxt=="error")
+  //     alert("Error: "+xhr.status+": "+xhr.statusText);
+  // });
+</script>
+</html>

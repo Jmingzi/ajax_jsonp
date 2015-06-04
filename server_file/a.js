@@ -1,0 +1,1 @@
+// showPrice({ 'price':123 });
